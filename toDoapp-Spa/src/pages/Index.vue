@@ -119,7 +119,7 @@ export default {
       this.tareas.splice(item, 1);
       
       window.localStorage.removeItem(index.toString());
-      alert(item)
+      
     }
   },
   created() {
