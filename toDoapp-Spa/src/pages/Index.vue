@@ -14,16 +14,19 @@
             <div class="text-h6">Tareas</div>
           </q-card-section>
           <q-separator></q-separator>
-          <q-card-section
-           
-            id="task-container"
-            class="body-card"
-          >
-            <q-banner  v-for="(tarea, index) in tareas" :key="index" class="bg-primary text-white q-mb-sm">
-              <span class="text-h4"  > {{ tarea }}</span> 
+          <q-card-section id="task-container" class="body-card">
+            <q-banner
+              v-for="(tarea, index) in tareas"
+              :key="index"
+              class="bg-primary text-white q-mb-sm"
+            >
+              <span class="text-h4"> {{ tarea }}</span>
               <template v-slot:action>
-                <q-btn flat color="white" label="Eliminar" @click="eliminarTarea(index)"
-
+                <q-btn
+                  flat
+                  color="white"
+                  label="Eliminar"
+                  @click="eliminarTarea(index)"
               /></template>
             </q-banner>
           </q-card-section>
@@ -64,7 +67,7 @@
             id="btn-agregar"
             flat
             label="Agregar tarea"
-            v-close-popup = "status"
+            v-close-popup="status"
             @click="addTask"
           />
         </q-card-actions>
@@ -73,54 +76,51 @@
   </q-page>
 </template>
 
-<script lang="ts">
-import { LocalStorage } from "quasar"
-import { stringify } from 'querystring';
-
+<script>
+/*eslint-disable */
 export default {
+   /*eslint-disable */
   data() {
     return {
       alert: false,
       confirm: false,
       prompt: false,
-      tareaDescripcion: '',
-      tareas: ['lavar','planchar'],
-      status : true
+      tareaDescripcion: "",
+      tareas: [""],
+      status: true
     };
   },
   methods: {
     addTask() {
-       this.status = true;
-      if (this.tareaDescripcion === '') {
+      /*eslint-disable */
+      this.status = true;
+      if (this.tareaDescripcion === "") {
         alert("Debe suministrar un nombre de tarea valido");
         this.status = false;
       } else {
         this.registrarTareas(this.tareaDescripcion);
-        this.tareaDescripcion = ''
+        this.tareaDescripcion = "";
       }
     },
 
-    registrarTareas(tarea: string) {
-      let index = this.tareas.length + 1
-      this.tareas.push(tarea)
-       window.localStorage.setItem(index.toString(),tarea)
+    registrarTareas(tarea) {
+      /*eslint-disable */
+      const index = this.tareas.length + 1;
+      this.tareas.push(tarea);
+      window.localStorage.setItem(index.toString(), tarea);
     },
 
-    mostraTareas()
-    {
-    
-       this.tareas = Object.values(localStorage)
-       console.log(this.tareas)
-     
+    mostra_tareas() {
+      this.tareas = Object.values(localStorage);
+      console.log(this.tareas);
     },
-    eliminarTarea(item)
-    {
-      this.tareas.splice(item,1)
-      window.localStorage.removeItem(item)
+    eliminarTarea(item) {
+      this.tareas.splice(item, 1);
+      window.localStorage.removeItem(item.toString());
     }
   },
-  created () {
-    this.mostraTareas()
+  created() {
+    this.mostra_tareas();
   }
 };
 </script>
