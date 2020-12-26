@@ -115,8 +115,11 @@ export default {
       console.log(this.tareas);
     },
     eliminarTarea(item) {
+      let index = item + 1
       this.tareas.splice(item, 1);
-      window.localStorage.removeItem(item.toString());
+      
+      window.localStorage.removeItem(index.toString());
+      alert(item)
     }
   },
   created() {
